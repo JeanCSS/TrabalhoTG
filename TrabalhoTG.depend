@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1635644936 source:c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\main.cpp
+1636231202 source:c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\main.cpp
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
 	"TGrafo.h"
 
-1635640677 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\include\tgrafo.h
+1636231091 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\include\tgrafo.h
 	<iostream>
 	<stdio.h>
 	<stdlib.h>

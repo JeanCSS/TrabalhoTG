@@ -12,7 +12,7 @@ class TGrafo{
     public:
         int MAdj[MAXVERTICES][MAXVERTICES];
 
-        TGrafo(int e, int n, int ultimo);
+        TGrafo(int n, int e, int ultimo);
 
         int getN();
         void setN(int _n);
@@ -23,19 +23,22 @@ class TGrafo{
         int getUltimo();
         void setUltimo(int _ultimo);
 
-        void inicializa();
+        int getGrau(int vertice);
+
         void insereVertice ();
         void imprimeGrafo ();
         void insereAresta (int a, int b);
 };
-
-TGrafo::TGrafo(int _e, int _n, int _ultimo){
+/// Construtor ////////////////////////////////////////////
+TGrafo::TGrafo(int _n, int _e, int _ultimo){ /// /////////
      n = _n;
      e = _e;
      ultimo = _ultimo;
-}
+}                                    ///  /////////////////
+/// ///////////////////////////////////////////////////////
 
-/// Get e Set ////////////////////////////////////////////
+
+/// Get & Set ////////////////////////////////////////////
 int TGrafo::getN(){
     return n;
 }
@@ -60,12 +63,17 @@ void TGrafo::setUltimo(int _ultimo){
     ultimo = _ultimo;
 }
 
+int TGrafo::getGrau(int vertice){
+    int i, cont=0;
+    for(i=0; i < n; i++)
+      cont += MAdj[vertice][i];
+
+    return cont;
+}
+
 /// ////////////////////////////////////////////////////////
 
-
-
-void TGrafo::insereVertice()
-{
+void TGrafo::insereVertice(){
       int i;
 
       for (i = 0; i <= n; i++){
@@ -76,20 +84,19 @@ void TGrafo::insereVertice()
       ultimo++;
 }
 
-void TGrafo::insereAresta (int a, int b)
-{
-      if (MAdj[a][b]==0) {
+void TGrafo::insereAresta (int a, int b){
+      if (MAdj[a][b] == 0) {
          if (a != b) {
             e++;
-            MAdj[a][b]  = 1;
-            MAdj[b][a]  = 1;
+            MAdj[a][b] = 1;
+            MAdj[b][a] = 1;
          }
       }
 
 }
 
-void TGrafo::imprimeGrafo ()
-{
+void TGrafo::imprimeGrafo (){
+     printf("Verice %d Aresta %d Ultimo %d \n", n, e, ultimo);
      int i,j;
 
       for (i = 0; i < n; i++)
