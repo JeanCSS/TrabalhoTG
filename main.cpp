@@ -91,6 +91,43 @@ void grafoAleatorio(TGrafo * grafo){
     }
 }
 
+void buscaEmLargura(TGrafo grafo, int inicio){
+    int i, j;
+    int visitados[MAXVERTICES];
+    int distancia[MAXVERTICES];
+    int antecessor[MAXVERTICES];
+    int vertice;
+    int contador = 0;
+
+    for(i = 0; i < grafo.getN(); i++){
+        visitados[i] = 0;
+        distancia[i] = 0;
+        antecessor[i] = -1;
+    }
+
+    visitados[inicio] = 1;
+    distancia[inicio] = 0;
+    antecessor[inicio] = -1;
+
+    for(i = 0; i < grafo.getN(); i++){
+        for(j = 0; j < grafo.getN(); j++){
+            if(grafo.MAdj[i][j] == 1){
+                if(visitados[j] == 0){
+                    visitados[j] = 1;
+                    distancia[j] = distancia[i] + 1;
+                    antecessor[j] = i;
+                }
+            }
+        }
+    }
+
+    for(i = 0; i < grafo.getN(); i++){
+        if(visitados[i] == 1){
+            printf("Vertice %d | Distancia %d | Antecessor %d\n", i, distancia[i], antecessor[i]);
+        }
+    }
+}
+
 int main(int argc, char *argv[]){
 
     TGrafo grafo = TGrafo(0, 0, 0);
@@ -168,6 +205,14 @@ int main(int argc, char *argv[]){
 
         if (op == 7){
             grafoAleatorio(&grafo);
+        }
+
+        if (op == 8){
+            printf("\n\t\t\tBusca em largura\n");
+            printf("\n\t\t\tInicio: ");
+            scanf("%d", &s);
+            buscaEmLargura(grafo, s);
+            system("PAUSE");
         }
 
     }while(op!=9);
