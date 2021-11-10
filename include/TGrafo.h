@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include "TVertice.h"
 #define MAXVERTICES 100
 #define MAXARESTAS  1000
 
@@ -10,9 +11,14 @@ class TGrafo{
         int e;             //n�mero de arestas do grafo
         int ultimo;       // indice do ultimo vertice inserido
     public:
+        TVertice * vertices;
         int MAdj[MAXVERTICES][MAXVERTICES];
+        int MAPeso[MAXVERTICES][MAXVERTICES];
 
-        TGrafo(int n, int e, int ultimo);
+
+        TGrafo(int _n, int _e, int _ultimo);
+
+        ~TGrafo();
 
         int getN();
         void setN(int _n);
@@ -27,14 +33,19 @@ class TGrafo{
 
         void insereVertice ();
         void imprimeGrafo ();
-        void insereAresta (int a, int b);
+        void insereAresta (int a, int b, int peso);
 };
-/// Construtor ////////////////////////////////////////////
+/// Construtor e Destructor ////////////////////////////////////////////
 TGrafo::TGrafo(int _n, int _e, int _ultimo){ /// /////////
-     n = _n;
-     e = _e;
-     ultimo = _ultimo;
-}                                    ///  /////////////////
+    n = _n;
+    e = _e;
+    ultimo = _ultimo;
+}
+
+TGrafo::~TGrafo(){
+    free(vertices);
+}
+
 /// ///////////////////////////////////////////////////////
 
 
@@ -74,28 +85,43 @@ int TGrafo::getGrau(int vertice){
 /// ////////////////////////////////////////////////////////
 
 void TGrafo::insereVertice(){
-      int i;
+    int i;
+    vertices = (TVertice *) malloc( (n+1) * sizeof(TVertice));
+    for (i = 0; i <= n; i++){
+        MAdj[n][i] = 0;
+        MAdj[i][n] = 0;
 
-      for (i = 0; i <= n; i++){
-         MAdj[n][i] = 0;
-         MAdj[i][n] = 0;
-      }
-      n++;
-      ultimo++;
+        vertices[i].setId(i);
+        vertices[i].setCor("Branco");
+        vertices[i].setDistancia(-1);
+        vertices[i].setPredecessorId(-1);
+    }
+    n++;
+    ultimo++;
 }
 
-void TGrafo::insereAresta (int a, int b){
+void TGrafo::insereAresta (int a, int b, int peso){
       if (MAdj[a][b] == 0) {
          if (a != b) {
             e++;
             MAdj[a][b] = 1;
             MAdj[b][a] = 1;
+
+
+            MAPeso[a][b]  = peso;
+            MAPeso[b][a]  = peso;
          }
       }
-
 }
 
 void TGrafo::imprimeGrafo (){
+
+    printf("\n TT | n | d");
+
+    for(int i = 0; i < n; i++){
+        printf("\n %d | %d | %d",vertices[i].getDistancia(), i, vertices[i].getPredecessorId());
+    }
+    printf("\n\n");
      printf("Verice %d Aresta %d Ultimo %d \n", n, e, ultimo);
      int i,j;
 
@@ -103,7 +129,11 @@ void TGrafo::imprimeGrafo (){
        {
         printf("\n");
         for (j = 0; j < n; j++)
-         printf(" %d ", MAdj[i][j]);
+          printf("[%d]", MAdj[i][j]);
+
+        printf("\t\t\t");
+        for (int k = 0; k < n; k++)
+          printf("[%d]", MAPeso[i][k]);
        }
 
 }

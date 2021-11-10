@@ -35,6 +35,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/TGrafo.h" />
+		<Unit filename="include/TVertice.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

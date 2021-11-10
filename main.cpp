@@ -71,7 +71,7 @@ void completarGrafo(TGrafo * grafo){
       for(j = 0;j < grafo->getN(); j++){
           if(i != j){
             if(grafo->MAdj[i][j]==0){
-                grafo->insereAresta(i, j);
+                grafo->insereAresta(i, j, i);
             }
           }
 
@@ -80,13 +80,14 @@ void completarGrafo(TGrafo * grafo){
 }
 
 void grafoAleatorio(TGrafo * grafo){
-    int qtdVertice = rand() % 10 + 3;;
+    int qtdVertice = rand() % 9 + 1;;
     *grafo = TGrafo(qtdVertice, 0, qtdVertice);
 
     for( int i = 0; i < qtdVertice; i++){
         int maxAresta = rand() % qtdVertice; ///
+        int peso = rand() % 21 + 2; ///
         for( int j = 0; j < maxAresta; j++){
-            grafo->insereAresta(i, rand() % qtdVertice);
+            grafo->insereAresta(i, rand() % qtdVertice, peso);
         }
     }
 }
@@ -132,7 +133,7 @@ int main(int argc, char *argv[]){
 
     TGrafo grafo = TGrafo(0, 0, 0);
 
-    int op, vert1, vert2, s;
+    int op, vert1, vert2, s, peso;
 
     system("cls");
     system("COLOR f0");
@@ -152,10 +153,9 @@ int main(int argc, char *argv[]){
 
         if (op == 2){ //Inserindo arestas
             printf("\nInserindo aresta...");
-            printf("\t1o. vertice: ");
-            scanf("%d", &vert1);
-            printf("\n\t\t\t2o. vertice: ");
-            scanf("%d", &vert2);
+            printf("\t1o. vertice: ");                  scanf("%d", &vert1);
+            printf("\n\t\t\t2o. vertice: ");            scanf("%d", &vert2);
+            printf("\n\t\t\t    Peso: ");               scanf("%d", &peso);
             if ((vert1 < 0) || (vert1>=grafo.getN()) || (vert2<0) || (vert2>=grafo.getN())){
                 printf("\n\tVertice inexistente!");
                 system("pause");
@@ -166,7 +166,7 @@ int main(int argc, char *argv[]){
                     system("pause");
                 }
                 else
-                    grafo.insereAresta(vert1,vert2);
+                    grafo.insereAresta(vert1,vert2, peso);
 
         }
 
