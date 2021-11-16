@@ -40,6 +40,7 @@ TGrafo::TGrafo(int _n, int _e, int _ultimo){ /// /////////
     n = _n;
     e = _e;
     ultimo = _ultimo;
+    vertices = (TVertice *) malloc((n) * sizeof(TVertice));
 }
 
 TGrafo::~TGrafo(){
@@ -86,18 +87,21 @@ int TGrafo::getGrau(int vertice){
 
 void TGrafo::insereVertice(){
     int i;
-    vertices = (TVertice *) malloc( (n+1) * sizeof(TVertice));
-    for (i = 0; i <= n; i++){
+    n++;
+    ultimo++;
+
+    printf("\nvalor de N: %d\n", n);
+    vertices = (TVertice *) malloc( (n) * sizeof(TVertice));
+    for (i = 0; i < n; i++){
         MAdj[n][i] = 0;
         MAdj[i][n] = 0;
+
 
         vertices[i].setId(i);
         vertices[i].setCor("Branco");
         vertices[i].setDistancia(-1);
         vertices[i].setPredecessorId(-1);
     }
-    n++;
-    ultimo++;
 }
 
 void TGrafo::insereAresta (int a, int b, int peso){
@@ -116,25 +120,24 @@ void TGrafo::insereAresta (int a, int b, int peso){
 
 void TGrafo::imprimeGrafo (){
 
-    printf("\n TT | n | d");
+    /*printf("\n TT | n | d");
 
     for(int i = 0; i < n; i++){
         printf("\n %d | %d | %d",vertices[i].getDistancia(), i, vertices[i].getPredecessorId());
-    }
-    printf("\n\n");
-     printf("Verice %d Aresta %d Ultimo %d \n", n, e, ultimo);
-     int i,j;
+    }*/
 
-      for (i = 0; i < n; i++)
-       {
+    printf("\n\n");
+    printf("Verice %d Aresta %d Ultimo %d \t\tMatriz de pesos\n", n, e, ultimo);
+    int i,j;
+
+    for (i = 0; i < n; i++){
         printf("\n");
         for (j = 0; j < n; j++)
-          printf("[%d]", MAdj[i][j]);
+            printf("[%d]", MAdj[i][j]);
 
         printf("\t\t\t");
         for (int k = 0; k < n; k++)
-          printf("[%d]", MAPeso[i][k]);
-       }
-
+            printf("[%d]", MAPeso[i][k]);
+    }
 }
 

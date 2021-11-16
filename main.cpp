@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "TGrafo.h"
+#include "BuscaEmLargura.h"
 
 #define MAXVERTICES 100
 #define MAXARESTAS  1000
@@ -18,6 +19,7 @@ void imprimeMenu(){
      printf("\n\t 5 - | completar o grafo");
      printf("\n\t 6 - | Verificar se o grafo eh arvore");
      printf("\n\t 7 - | Gerar grafo aleatorio");
+     printf("\n\t 8 - | Busca em largura");
      printf("\n\t 9 - | Sair");
      printf("\n\t=======================================");
      printf("\n\t Opcao -> ");
@@ -81,50 +83,14 @@ void completarGrafo(TGrafo * grafo){
 
 void grafoAleatorio(TGrafo * grafo){
     int qtdVertice = rand() % 9 + 1;;
-    *grafo = TGrafo(qtdVertice, 0, qtdVertice);
+    *grafo = TGrafo(0, 0, 0);
 
     for( int i = 0; i < qtdVertice; i++){
+        grafo->insereVertice();
         int maxAresta = rand() % qtdVertice; ///
         int peso = rand() % 21 + 2; ///
         for( int j = 0; j < maxAresta; j++){
             grafo->insereAresta(i, rand() % qtdVertice, peso);
-        }
-    }
-}
-
-void buscaEmLargura(TGrafo grafo, int inicio){
-    int i, j;
-    int visitados[MAXVERTICES];
-    int distancia[MAXVERTICES];
-    int antecessor[MAXVERTICES];
-    int vertice;
-    int contador = 0;
-
-    for(i = 0; i < grafo.getN(); i++){
-        visitados[i] = 0;
-        distancia[i] = 0;
-        antecessor[i] = -1;
-    }
-
-    visitados[inicio] = 1;
-    distancia[inicio] = 0;
-    antecessor[inicio] = -1;
-
-    for(i = 0; i < grafo.getN(); i++){
-        for(j = 0; j < grafo.getN(); j++){
-            if(grafo.MAdj[i][j] == 1){
-                if(visitados[j] == 0){
-                    visitados[j] = 1;
-                    distancia[j] = distancia[i] + 1;
-                    antecessor[j] = i;
-                }
-            }
-        }
-    }
-
-    for(i = 0; i < grafo.getN(); i++){
-        if(visitados[i] == 1){
-            printf("Vertice %d | Distancia %d | Antecessor %d\n", i, distancia[i], antecessor[i]);
         }
     }
 }
@@ -211,7 +177,7 @@ int main(int argc, char *argv[]){
             printf("\n\t\t\tBusca em largura\n");
             printf("\n\t\t\tInicio: ");
             scanf("%d", &s);
-            buscaEmLargura(grafo, s);
+            BuscaEmLargura bfs = BuscaEmLargura(grafo, s);
             system("PAUSE");
         }
 
