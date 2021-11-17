@@ -89,13 +89,11 @@ void TGrafo::insereVertice(){
     int i;
     n++;
     ultimo++;
-
-    printf("\nvalor de N: %d\n", n);
-    vertices = (TVertice *) malloc( (n) * sizeof(TVertice));
+    //printf("\nvalor de N: %d\n", n);
+    vertices = (TVertice *) malloc((n) * sizeof(TVertice));
     for (i = 0; i < n; i++){
         MAdj[n][i] = 0;
         MAdj[i][n] = 0;
-
 
         vertices[i].setId(i);
         vertices[i].setCor("Branco");

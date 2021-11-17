@@ -12,6 +12,8 @@ class BuscaEmLargura
         BuscaEmLargura(TGrafo grafo, int inicio);
         virtual ~BuscaEmLargura() {}
 
+        void visitar(TGrafo grafo, int id);
+
     protected:
 
     private:
@@ -27,6 +29,19 @@ BuscaEmLargura::BuscaEmLargura(TGrafo grafo, int inicio){
             << " PredecessorId " << grafo.vertices[i].getPredecessorId()<<
         endl;
     }
+    visitar(grafo, inicio);
+}
+
+void BuscaEmLargura::visitar(TGrafo grafo, int id){
+        grafo.vertices[id].setCor("Cinza");
+        cout
+            << " Vertice " << grafo.vertices[id].getId()
+            << " Cor " << grafo.vertices[id].getCor()
+            << " Distancia " << grafo.vertices[id].getDistancia()
+            << " PredecessorId " << grafo.vertices[id].getPredecessorId()<<
+        endl;
+
+
 }
 
 #endif // BUSCAEMLARGURA_H

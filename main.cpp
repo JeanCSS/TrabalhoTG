@@ -82,7 +82,7 @@ void completarGrafo(TGrafo * grafo){
 }
 
 void grafoAleatorio(TGrafo * grafo){
-    int qtdVertice = rand() % 9 + 1;;
+    int qtdVertice = rand() % 9 + 1;
     *grafo = TGrafo(0, 0, 0);
 
     for( int i = 0; i < qtdVertice; i++){
