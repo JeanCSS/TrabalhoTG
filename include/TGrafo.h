@@ -1,3 +1,5 @@
+#ifndef TGRAFO_H
+#define TGRAFO_H
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,7 +20,10 @@ class TGrafo{
 
         TGrafo(int _n, int _e, int _ultimo);
 
-        ~TGrafo();
+        ~TGrafo(){
+            cout << "Destructor called"<<endl;
+            //free(vertices);
+        }
 
         int getN();
         void setN(int _n);
@@ -40,13 +45,8 @@ TGrafo::TGrafo(int _n, int _e, int _ultimo){ /// /////////
     n = _n;
     e = _e;
     ultimo = _ultimo;
-    vertices = (TVertice *) malloc((n) * sizeof(TVertice));
+    vertices = (TVertice *) malloc( (n) * sizeof(TVertice));
 }
-
-TGrafo::~TGrafo(){
-    free(vertices);
-}
-
 /// ///////////////////////////////////////////////////////
 
 
@@ -89,11 +89,11 @@ void TGrafo::insereVertice(){
     int i;
     n++;
     ultimo++;
-    //printf("\nvalor de N: %d\n", n);
-    vertices = (TVertice *) malloc((n) * sizeof(TVertice));
+    vertices = (TVertice *) malloc( (n) * sizeof(TVertice));
     for (i = 0; i < n; i++){
         MAdj[n][i] = 0;
         MAdj[i][n] = 0;
+
 
         vertices[i].setId(i);
         vertices[i].setCor("Branco");
@@ -125,17 +125,19 @@ void TGrafo::imprimeGrafo (){
     }*/
 
     printf("\n\n");
-    printf("Verice %d Aresta %d Ultimo %d \t\tMatriz de pesos\n", n, e, ultimo);
-    int i,j;
+     printf("Verice %d Aresta %d Ultimo %d \t\tMatriz de pesos\n", n, e, ultimo);
+     int i,j;
 
-    for (i = 0; i < n; i++){
+      for (i = 0; i < n; i++)
+       {
         printf("\n");
         for (j = 0; j < n; j++)
-            printf("[%d]", MAdj[i][j]);
+          printf("[%d]", MAdj[i][j]);
 
         printf("\t\t\t");
         for (int k = 0; k < n; k++)
-            printf("[%d]", MAPeso[i][k]);
-    }
-}
+          printf("[%d]", MAPeso[i][k]);
+       }
 
+}
+#endif // TGRAFO_H

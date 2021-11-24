@@ -1,47 +1,96 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 #ifndef BUSCAEMLARGURA_H
 #define BUSCAEMLARGURA_H
 
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <list>
+#include "TGrafo.h"
+#include "TVertice.h"
+using namespace std;
 
-class BuscaEmLargura
-{
+class BuscaEmLargura{
+
     public:
-        BuscaEmLargura() {}
-        BuscaEmLargura(TGrafo grafo, int inicio);
-        virtual ~BuscaEmLargura() {}
+        list<int> fila;
+        list <int> :: iterator primeiroLista, ultimoLista;
+        int FinalFila, inicioFila;
 
-        void visitar(TGrafo grafo, int id);
 
-    protected:
+        BuscaEmLargura(TGrafo grafo, int VericeInicial){
+            FinalFila = 0;
+            inicioFila = 0;
 
-    private:
-};
+            grafo.vertices[VericeInicial].setCor("Cinza");
+            grafo.vertices[VericeInicial].setDistancia(0);
+            grafo.vertices[VericeInicial].setPredecessorId(-1);
 
-BuscaEmLargura::BuscaEmLargura(TGrafo grafo, int inicio){
-    for(int i = 0; i < grafo.getN(); i++){
-        //printf("Vertice %d <<  Distancia  %d<<\n", grafo.vertices[i].getId(), grafo.vertices[i].getDistancia());
-        cout
-            << " Vertice " << grafo.vertices[i].getId()
-            << " Cor " << grafo.vertices[i].getCor()
-            << " Distancia " << grafo.vertices[i].getDistancia()
-            << " PredecessorId " << grafo.vertices[i].getPredecessorId()<<
-        endl;
+            fila.push_back(VericeInicial);
+            primeiroLista = fila.begin();
+
+            printFila(fila, grafo.getN(), grafo.vertices);
+
+            visitar(grafo, *primeiroLista);
+
+        }
+
+    void visitar(TGrafo grafo, int id){
+
+        cout << "Visitou o "<< id << endl;
+        for(int i = 0; i < grafo.getN(); i++){
+             if(grafo.MAdj[id][i] == 1 && grafo.vertices[i].getCor() == "Branco"){
+                grafo.vertices[i].setCor("Cinza");
+                grafo.vertices[i].setDistancia(grafo.vertices[id].getDistancia() + 1);
+                grafo.vertices[i].setPredecessorId(grafo.vertices[id].getId());
+
+                fila.push_back(grafo.vertices[i].getId());
+
+                primeiroLista = fila.begin();
+                ultimoLista = fila.end();
+
+                //cout << grafo.vertices[*ultimoLista].getId()<< ": " << grafo.vertices[*ultimoLista].getCor() << " | ";
+                FinalFila++;
+             }
+        }
+        printf("\n");
+        grafo.vertices[id].setCor("Preto");
+
+        printFila(fila, grafo.getN(), grafo.vertices);
+
+        cout << "Retirado o " << *primeiroLista << " da lista" << endl;
+        fila.pop_front();
+        primeiroLista = fila.begin();
+        ultimoLista = fila.end();
+
+        if(fila.size() > 0){
+            visitar(grafo, *primeiroLista);
+        }
     }
-    visitar(grafo, inicio);
-}
 
-void BuscaEmLargura::visitar(TGrafo grafo, int id){
-        grafo.vertices[id].setCor("Cinza");
-        cout
-            << " Vertice " << grafo.vertices[id].getId()
-            << " Cor " << grafo.vertices[id].getCor()
-            << " Distancia " << grafo.vertices[id].getDistancia()
-            << " PredecessorId " << grafo.vertices[id].getPredecessorId()<<
-        endl;
+    void printFila(list<int> fila, int n, TVertice v[]){
+        cout << fila.size()<< endl;
+        if(fila.size() > 0){
+            cout << "   D[ ";
+            for(int i = 0; i < n; i++){/// percore todos os vertices e imprime a distancia
+                cout << " | " << v[i].getId() << ": " << v[i].getDistancia() << " | ";
+            }
+            cout << " ]" << endl;
 
+            cout << "   P[ ";
+            for(int i = 0; i < n; i++){ /// percore todos os vertices e imprime o predessesor
+                cout << " | " << v[i].getId() << ": " << v[i].getPredecessorId() << " | ";
+            }
+            cout << " ]" << endl;
 
-}
+            cout << "   Q[ ";
+            for(list<int>::iterator it = fila.begin(); it!=fila.end(); it++){/// percore a fila de vertices e imprime os elementos que est�o nela
+                cout << " | " << v[*it].getId() << ": " << v[*it].getCor() << " | ";
+            }
+            cout << " ]" << endl;
+        }
+
+    }
+
+};
 
 #endif // BUSCAEMLARGURA_H

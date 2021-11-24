@@ -1,3 +1,5 @@
+#ifndef TVERTICE_H
+#define TVERTICE_H
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -61,3 +63,4 @@ int TVertice::getPredecessorId(){
 void TVertice::setPredecessorId(int _predecessorId){
     predecessorId = _predecessorId;
 }
+#endif // TVERTICE_H
