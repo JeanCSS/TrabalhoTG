@@ -1,12 +1,9 @@
-#ifndef BUSCAEMLARGURA_H
-#define BUSCAEMLARGURA_H
-
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <list>
-#include "TGrafo.h"
-#include "TVertice.h"
+//#include "TGrafo.h"
+//#include "TVertice.h"
 using namespace std;
 
 class BuscaEmLargura{
@@ -38,7 +35,7 @@ class BuscaEmLargura{
 
         cout << "Visitou o "<< id << endl;
         for(int i = 0; i < grafo.getN(); i++){
-             if(grafo.MAdj[id][i] == 1 && grafo.vertices[i].getCor() == "Branco"){
+             if((grafo.MAdj[id][i] == 1 || grafo.MAdj[i][id] == 1) && grafo.vertices[i].getCor() == "Branco"){
                 grafo.vertices[i].setCor("Cinza");
                 grafo.vertices[i].setDistancia(grafo.vertices[id].getDistancia() + 1);
                 grafo.vertices[i].setPredecessorId(grafo.vertices[id].getId());
@@ -48,9 +45,10 @@ class BuscaEmLargura{
                 primeiroLista = fila.begin();
                 ultimoLista = fila.end();
 
-                //cout << grafo.vertices[*ultimoLista].getId()<< ": " << grafo.vertices[*ultimoLista].getCor() << " | ";
+                cout << "Descobriu o vertice " << i <<endl;
                 FinalFila++;
              }
+
         }
         printf("\n");
         grafo.vertices[id].setCor("Preto");
@@ -83,14 +81,12 @@ class BuscaEmLargura{
             cout << " ]" << endl;
 
             cout << "   Q[ ";
-            for(list<int>::iterator it = fila.begin(); it!=fila.end(); it++){/// percore a fila de vertices e imprime os elementos que est�o nela
-                cout << " | " << v[*it].getId() << ": " << v[*it].getCor() << " | ";
+            for(int i : fila){/// percore a fila de vertices e imprime os elementos que estão nela
+                cout << " | " << v[i].getId() << ": " << v[i].getCor() << " | ";
             }
-            cout << " ]" << endl;
+            cout << " ]\n\n" << endl;
         }
 
     }
 
 };
-
-#endif // BUSCAEMLARGURA_H
