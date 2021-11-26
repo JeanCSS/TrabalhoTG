@@ -1,5 +1,3 @@
-#ifndef TGRAFO_H
-#define TGRAFO_H
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,7 +36,7 @@ class TGrafo{
 
         void insereVertice ();
         void imprimeGrafo ();
-        void insereAresta (int a, int b, int peso);
+        std::string insereAresta (int a, int b, int peso);
 };
 /// Construtor e Destructor ////////////////////////////////////////////
 TGrafo::TGrafo(int _n, int _e, int _ultimo){ /// /////////
@@ -89,6 +87,8 @@ void TGrafo::insereVertice(){
     int i;
     n++;
     ultimo++;
+
+    printf("\nvalor de N: %d\n", n);
     vertices = (TVertice *) malloc( (n) * sizeof(TVertice));
     for (i = 0; i < n; i++){
         MAdj[n][i] = 0;
@@ -102,18 +102,24 @@ void TGrafo::insereVertice(){
     }
 }
 
-void TGrafo::insereAresta (int a, int b, int peso){
-      if (MAdj[a][b] == 0) {
-         if (a != b) {
-            e++;
-            MAdj[a][b] = 1;
-            MAdj[b][a] = 1;
+std::string TGrafo::insereAresta (int a, int b, int peso){
+    if (a == b){
+        return "\n\tImpossivel inserir loop!";
+    }
+    if ((a < 0) || (a >= n) || (b < 0) || (b >= n)){
+        return "\n\tVertice inexistente!";
+    }
+    if (MAdj[a][b] == 1) {
+        return "\n\tA aresta já existente!";
+    }
+    e++;
+    MAdj[a][b] = 1;
+    MAdj[b][a] = 1;
 
+    MAPeso[a][b]  = peso;
+    MAPeso[b][a]  = peso;
 
-            MAPeso[a][b]  = peso;
-            MAPeso[b][a]  = peso;
-         }
-      }
+    return "\n\tAresta inserida!";
 }
 
 void TGrafo::imprimeGrafo (){
@@ -132,12 +138,12 @@ void TGrafo::imprimeGrafo (){
        {
         printf("\n");
         for (j = 0; j < n; j++)
-          printf("[%d]", MAdj[i][j]);
+          printf("|%d|", MAdj[i][j]);
 
         printf("\t\t\t");
         for (int k = 0; k < n; k++)
-          printf("[%d]", MAPeso[i][k]);
+          printf("|%d|", MAPeso[i][k]);
        }
 
 }
-#endif // TGRAFO_H
+
