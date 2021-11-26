@@ -90,7 +90,7 @@ void grafoAleatorio(TGrafo * grafo){
         int maxAresta = rand() % qtdVertice; ///
         int peso = rand() % 21 + 2; ///
         for( int j = 0; j < maxAresta; j++){
-            grafo->insereAresta(i, rand() % qtdVertice, peso);
+            string r = grafo->insereAresta(i, rand() % qtdVertice, peso);
         }
     }
 }
@@ -101,7 +101,7 @@ int main(int argc, char *argv[]){
 
     int op, vert1, vert2, s, peso;
 
-    //system("cls");
+    system("cls");
     system("COLOR f0");
 
     do{
@@ -122,17 +122,12 @@ int main(int argc, char *argv[]){
             printf("\t1o. vertice: ");                  scanf("%d", &vert1);
             printf("\n\t\t\t2o. vertice: ");            scanf("%d", &vert2);
             printf("\n\t\t\t    Peso: ");               scanf("%d", &peso);
-            if ((vert1 < 0) || (vert1>=grafo.getN()) || (vert2<0) || (vert2>=grafo.getN())){
-                printf("\n\tVertice inexistente!");
-                system("pause");
-            }
-            else
-                if (vert1 == vert2){
-                    printf("\n\tImpossivel inserir loop!");
-                    system("pause");
-                }
-                else
-                    grafo.insereAresta(vert1,vert2, peso);
+
+            string responce = grafo.insereAresta(vert1,vert2, peso);
+
+            cout << responce << endl;
+
+            system("pause");
 
         }
 
