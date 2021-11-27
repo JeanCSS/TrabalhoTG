@@ -1,9 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <list>
-#include "TGrafo.h"
-//#include "TVertice.h"
+#include <list> 
 using namespace std;
 
 class BuscaEmLargura{
@@ -82,7 +80,7 @@ class BuscaEmLargura{
 
 
             cout << "   Q[ ";
-            //for(int i : fila){/// percore a fila de vertices e imprime os elementos que estão nela
+            //for(int i : fila){/// percore a fila de vertices e imprime os elementos que estÃ£o nela
             for(list<int>::iterator i = fila.begin(); i!=fila.end(); i++){
                 cout << " | " << v[*i].getId() << ": " << v[*i].getCor() << " | ";
             }
