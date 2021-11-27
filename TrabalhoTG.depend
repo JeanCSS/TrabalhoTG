@@ -1,25 +1,28 @@
 # depslib dependency file v1.0
-1637983941 source:c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\main.cpp
+1638038868 source:c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\main.cpp
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
 	"TGrafo.h"
 	"BuscaEmLargura.h"
+	"BuscaEmProfundidade.h"
 
-1637986584 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\include\tgrafo.h
+1637989835 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\include\tgrafo.h
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
 	"TVertice.h"
 
-1637984132 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\include\tvertice.h
+1637989835 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\include\tvertice.h
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
 
-1637984099 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\include\buscaemlargura.h
+1638039298 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\include\buscaemlargura.h
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
 	<list>
+
+1638039076 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalhotg\include\buscaemprofundidade.h
 

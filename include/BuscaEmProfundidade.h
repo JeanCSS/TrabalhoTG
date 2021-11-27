@@ -1,22 +1,19 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <list>
-using namespace std;
+#ifndef BUSCAEMPROFUNDIDADE_H
+#define BUSCAEMPROFUNDIDADE_H
 
-class BuscaEmLargura{
 
+class BuscaEmProfundidade{
     public:
         list<int> fila;
         list <int> :: iterator primeiroLista, ultimoLista;
         int FinalFila, inicioFila;
 
 
-        BuscaEmLargura(TGrafo grafo, int VericeInicial){
+        BuscaEmProfundidade(TGrafo grafo, int VericeInicial){
             FinalFila = 0;
             inicioFila = 0;
 
-            for (int i = 0; i < grafo.getN(); i++){ /// zerar os vetores antes pois apÃ³s execulatar uma vez todos ficam com cor preta
+            for (int i = 0; i < grafo.getN(); i++){ /// zerar os vetores antes pois após execulatar uma vez todos ficam com cor preta
                 grafo.vertices[i].setId(i);
                 grafo.vertices[i].setCor("Branco");
                 grafo.vertices[i].setDistancia(-1);
@@ -71,7 +68,7 @@ class BuscaEmLargura{
     }
 
     void printFila(list<int> fila, int n, TVertice v[]){
-        cout << "Tamanho da fila " << fila.size()<< endl;
+        cout << fila.size()<< endl;
         if(fila.size() > 0){
             cout << "   D[ ";
             for(int i = 0; i < n; i++){/// percore todos os vertices e imprime a distancia
@@ -87,7 +84,7 @@ class BuscaEmLargura{
 
 
             cout << "   Q[ ";
-            //for(int i : fila){/// percore a fila de vertices e imprime os elementos que estÃ£o nela
+            //for(int i : fila){/// percore a fila de vertices e imprime os elementos que estão nela
             for(list<int>::iterator i = fila.begin(); i!=fila.end(); i++){
                 cout << " | " << v[*i].getId() << ": " << v[*i].getCor() << " | ";
             }
@@ -97,3 +94,5 @@ class BuscaEmLargura{
     }
 
 };
+
+#endif // BUSCAEMPROFUNDIDADE_H

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "TGrafo.h"
 #include "BuscaEmLargura.h"
+#include "BuscaEmProfundidade.h"
 
 #define MAXVERTICES 100
 #define MAXARESTAS  1000
@@ -19,8 +20,9 @@ void imprimeMenu(){
      printf("\n\t 5 - | completar o grafo");
      printf("\n\t 6 - | Verificar se o grafo eh arvore");
      printf("\n\t 7 - | Gerar grafo aleatorio");
-     printf("\n\t 8 - | Busca em largura");
-     printf("\n\t 9 - | Sair");
+     printf("\n\t 8 - | Busca em Largura");
+     printf("\n\t 9 - | Busca em Profundidade");
+     printf("\n\t 0 - | Sair");
      printf("\n\t=======================================");
      printf("\n\t Opcao -> ");
 }
@@ -172,11 +174,21 @@ int main(int argc, char *argv[]){
             printf("\n\t\t\tBusca em largura\n");
             printf("\n\tInicio: ");
             scanf("%d", &s);
+
             BuscaEmLargura bfs = BuscaEmLargura(grafo, s);
+
+            system("PAUSE");
+
+        }
+        if (op == 9){
+            printf("\n\t\t\tBusca em Profundidade\n");
+            printf("\n\tInicio: ");
+            scanf("%d", &s);
+            BuscaEmProfundidade dfs = BuscaEmProfundidade(grafo, s);
             system("PAUSE");
         }
 
-    }while(op!=9);
+    }while(op!=0);
  //
     return 0;
 }
