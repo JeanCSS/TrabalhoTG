@@ -82,7 +82,7 @@ void completarGrafo(TGrafo * grafo){
 }
 
 void grafoAleatorio(TGrafo * grafo){
-    int qtdVertice = rand() % 9 + 1;;
+    int qtdVertice = rand() % 9 + 1;
     *grafo = TGrafo(0, 0, 0);
 
     for( int i = 0; i < qtdVertice; i++){
@@ -170,7 +170,7 @@ int main(int argc, char *argv[]){
 
         if (op == 8){
             printf("\n\t\t\tBusca em largura\n");
-            printf("\n\tInicio: ");
+            printf("\n\t\t\tInicio: ");
             scanf("%d", &s);
             BuscaEmLargura bfs = BuscaEmLargura(grafo, s);
             system("PAUSE");

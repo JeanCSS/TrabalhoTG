@@ -1,38 +1,29 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+<<<<<<< HEAD
 #include <list>
 //#include "TGrafo.h"
 //#include "TVertice.h"
 using namespace std;
+=======
+#ifndef BUSCAEMLARGURA_H
+#define BUSCAEMLARGURA_H
+>>>>>>> parent of 1264040 (Busca em largura atualizado)
 
-class BuscaEmLargura{
 
+class BuscaEmLargura
+{
     public:
-        list<int> fila;
-        list <int> :: iterator primeiroLista, ultimoLista;
-        int FinalFila, inicioFila;
+        BuscaEmLargura() {}
+        BuscaEmLargura(TGrafo grafo, int inicio);
+        virtual ~BuscaEmLargura() {}
 
+        void visitar(TGrafo grafo, int id);
 
-        BuscaEmLargura(TGrafo grafo, int VericeInicial){
-            FinalFila = 0;
-            inicioFila = 0;
+    protected:
 
-            grafo.vertices[VericeInicial].setCor("Cinza");
-            grafo.vertices[VericeInicial].setDistancia(0);
-            grafo.vertices[VericeInicial].setPredecessorId(-1);
-
-            fila.push_back(VericeInicial);
-            primeiroLista = fila.begin();
-
-            printFila(fila, grafo.getN(), grafo.vertices);
-
-            visitar(grafo, *primeiroLista);
-
-        }
-
-    void visitar(TGrafo grafo, int id){
-
+<<<<<<< HEAD
         cout << "Visitou o "<< id << endl;
         for(int i = 0; i < grafo.getN(); i++){
              if((grafo.MAdj[id][i] == 1 || grafo.MAdj[i][id] == 1) && grafo.vertices[i].getCor() == "Branco"){
@@ -59,27 +50,34 @@ class BuscaEmLargura{
         fila.pop_front();
         primeiroLista = fila.begin();
         ultimoLista = fila.end();
+=======
+    private:
+};
+>>>>>>> parent of 1264040 (Busca em largura atualizado)
 
-        if(fila.size() > 0){
-            visitar(grafo, *primeiroLista);
-        }
+BuscaEmLargura::BuscaEmLargura(TGrafo grafo, int inicio){
+    for(int i = 0; i < grafo.getN(); i++){
+        //printf("Vertice %d <<  Distancia  %d<<\n", grafo.vertices[i].getId(), grafo.vertices[i].getDistancia());
+        cout
+            << " Vertice " << grafo.vertices[i].getId()
+            << " Cor " << grafo.vertices[i].getCor()
+            << " Distancia " << grafo.vertices[i].getDistancia()
+            << " PredecessorId " << grafo.vertices[i].getPredecessorId()<<
+        endl;
     }
+    visitar(grafo, inicio);
+}
 
-    void printFila(list<int> fila, int n, TVertice v[]){
-        cout << fila.size()<< endl;
-        if(fila.size() > 0){
-            cout << "   D[ ";
-            for(int i = 0; i < n; i++){/// percore todos os vertices e imprime a distancia
-                cout << " | " << v[i].getId() << ": " << v[i].getDistancia() << " | ";
-            }
-            cout << " ]" << endl;
+void BuscaEmLargura::visitar(TGrafo grafo, int id){
+        grafo.vertices[id].setCor("Cinza");
+        cout
+            << " Vertice " << grafo.vertices[id].getId()
+            << " Cor " << grafo.vertices[id].getCor()
+            << " Distancia " << grafo.vertices[id].getDistancia()
+            << " PredecessorId " << grafo.vertices[id].getPredecessorId()<<
+        endl;
 
-            cout << "   P[ ";
-            for(int i = 0; i < n; i++){ /// percore todos os vertices e imprime o predessesor
-                cout << " | " << v[i].getId() << ": " << v[i].getPredecessorId() << " | ";
-            }
-            cout << " ]" << endl;
-
+<<<<<<< HEAD
             cout << "   Q[ ";
             for(int i : fila){/// percore a fila de vertices e imprime os elementos que estão nela
                 cout << " | " << v[i].getId() << ": " << v[i].getCor() << " | ";
@@ -90,3 +88,9 @@ class BuscaEmLargura{
     }
 
 };
+=======
+
+}
+
+#endif // BUSCAEMLARGURA_H
+>>>>>>> parent of 1264040 (Busca em largura atualizado)

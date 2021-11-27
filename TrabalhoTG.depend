@@ -22,29 +22,3 @@
 	<stdio.h>
 	<stdlib.h>
 
-1637795325 source:c:\users\jeanc\documents\unipac\teoria dos grafos\trabalho_final\trabalhotg\main.cpp
-	<iostream>
-	<stdio.h>
-	<stdlib.h>
-	"TGrafo.h"
-	"BuscaEmLargura.h"
-
-1637795450 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalho_final\trabalhotg\include\tgrafo.h
-	<iostream>
-	<stdio.h>
-	<stdlib.h>
-	"TVertice.h"
-
-1637795544 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalho_final\trabalhotg\include\tvertice.h
-	<iostream>
-	<stdio.h>
-	<stdlib.h>
-
-1637795347 c:\users\jeanc\documents\unipac\teoria dos grafos\trabalho_final\trabalhotg\include\buscaemlargura.h
-	<iostream>
-	<stdio.h>
-	<stdlib.h>
-	<list>
-	"TGrafo.h"
-	"TVertice.h"
-

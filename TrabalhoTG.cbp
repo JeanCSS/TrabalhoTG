@@ -34,7 +34,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/BuscaEmLargura.h" />
 		<Unit filename="include/TGrafo.h" />
 		<Unit filename="include/TVertice.h" />
 		<Unit filename="main.cpp" />
