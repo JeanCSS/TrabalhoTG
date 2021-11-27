@@ -79,8 +79,8 @@ void BuscaEmLargura::visitar(TGrafo grafo, int id){
 
 <<<<<<< HEAD
             cout << "   Q[ ";
-            for(int i : fila){/// percore a fila de vertices e imprime os elementos que estão nela
-                cout << " | " << v[i].getId() << ": " << v[i].getCor() << " | ";
+            for(list<int>::iterator i = fila.begin(); i!=fila.end(); i++){
+                cout << " | " << v[*i].getId() << ": " << v[*i].getCor() << " | ";
             }
             cout << " ]\n\n" << endl;
         }
