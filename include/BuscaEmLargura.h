@@ -8,13 +8,9 @@ class BuscaEmLargura{
 
     public:
         list<int> fila;
-        list <int> :: iterator primeiroLista, ultimoLista;
-        int FinalFila, inicioFila;
-
+        list <int> :: iterator primeiroFila, ultimoFila;
 
         BuscaEmLargura(TGrafo grafo, int VericeInicial){
-            FinalFila = 0;
-            inicioFila = 0;
 
             for (int i = 0; i < grafo.getN(); i++){ /// zerar os vetores antes pois após execulatar uma vez todos ficam com cor preta
                 grafo.vertices[i].setId(i);
@@ -28,11 +24,11 @@ class BuscaEmLargura{
             grafo.vertices[VericeInicial].setPredecessorId(-1);
 
             fila.push_back(VericeInicial);
-            primeiroLista = fila.begin();
+            primeiroFila = fila.begin();
 
             printFila(fila, grafo.getN(), grafo.vertices);
 
-            visitar(grafo, *primeiroLista);
+            visitar(grafo, *primeiroFila);
 
         }
 
@@ -47,11 +43,10 @@ class BuscaEmLargura{
 
                 fila.push_back(grafo.vertices[i].getId());
 
-                primeiroLista = fila.begin();
-                ultimoLista = fila.end();
+                primeiroFila = fila.begin();
+                ultimoFila = fila.end();
 
                 cout << "Descobriu o vertice " << i <<endl;
-                FinalFila++;
              }
 
         }
@@ -60,13 +55,13 @@ class BuscaEmLargura{
 
         printFila(fila, grafo.getN(), grafo.vertices);
 
-        cout << "Retirado o " << *primeiroLista << " da lista" << endl;
+        cout << "Retirado o " << *primeiroFila << " da lista" << endl;
         fila.pop_front();
-        primeiroLista = fila.begin();
-        ultimoLista = fila.end();
+        primeiroFila = fila.begin();
+        ultimoFila = fila.end();
 
         if(fila.size() > 0){
-            visitar(grafo, *primeiroLista);
+            visitar(grafo, *primeiroFila);
         }
     }
 

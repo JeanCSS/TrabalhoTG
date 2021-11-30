@@ -4,6 +4,7 @@
 #include "TGrafo.h"
 #include "BuscaEmLargura.h"
 #include "BuscaEmProfundidade.h"
+#include "Dijstra.h"
 
 #define MAXVERTICES 100
 #define MAXARESTAS  1000
@@ -22,6 +23,7 @@ void imprimeMenu(){
      printf("\n\t 7 - | Gerar grafo aleatorio");
      printf("\n\t 8 - | Busca em Largura");
      printf("\n\t 9 - | Busca em Profundidade");
+     printf("\n\t 10- | Dijstra");
      printf("\n\t 0 - | Sair");
      printf("\n\t=======================================");
      printf("\n\t Opcao -> ");
@@ -170,17 +172,24 @@ int main(int argc, char *argv[]){
             grafoAleatorio(&grafo);
         }
 
-        if (op == 8){
-            printf("\n\t\t\tBusca em largura\n");
+        if (op == 10){
+            printf("\n\t\t\tDijstra\n");
             printf("\n\tInicio: ");
             scanf("%d", &s);
 
-            BuscaEmLargura bfs = BuscaEmLargura(grafo, s);
+            Dijstra dfs = Dijstra(grafo, s);
 
             system("PAUSE");
 
         }
         if (op == 9){
+            printf("\n\t\t\tBusca em Profundidade\n");
+            printf("\n\tInicio: ");
+            scanf("%d", &s);
+            BuscaEmProfundidade dfs = BuscaEmProfundidade(grafo, s);
+            system("PAUSE");
+        }
+        if (op == 8){
             printf("\n\t\t\tBusca em Profundidade\n");
             printf("\n\tInicio: ");
             scanf("%d", &s);
