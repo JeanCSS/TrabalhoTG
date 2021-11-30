@@ -9,7 +9,7 @@ class Dijstra{
 
         Dijstra(TGrafo grafo, int VericeInicial){
 
-            for (int i = 0; i < grafo.getN(); i++){ /// zerar os vetores antes pois após execulatar uma vez todos ficam com cor preta
+            for (int i = 0; i < grafo.getN(); i++){ /// zerar os vetores antes pois apÃ³s execulatar uma vez todos ficam com cor preta
                 grafo.vertices[i].setId(i);
                 grafo.vertices[i].setCor("Branco");
                 grafo.vertices[i].setDistancia(-1);
@@ -34,12 +34,19 @@ class Dijstra{
         cout << "Visitou o "<< id << endl;
         for(int i = 0; i < grafo.getN(); i++){
              if((grafo.MAdj[id][i] == 1 || grafo.MAdj[i][id] == 1) && grafo.vertices[i].getCor() == "Branco"){
+                int distanciaPredecessor = grafo.vertices[id].getDistancia();  
+                int pesoAresta = grafo.MPeso[i][id];
+                
                 grafo.vertices[i].setCor("Cinza");
-                grafo.vertices[i].setDistancia(grafo.vertices[id].getDistancia() + 1);
-                grafo.vertices[i].setPredecessorId(grafo.vertices[id].getId());
+                grafo.vertices[i].setDistancia(distanciaPredecessor + pesoAresta); /// pega a distancia atual mais o peso
+                grafo.vertices[i].setPredecessorId(id); 
+                
+                fila.push_back(i);
 
-                fila.push_back(grafo.vertices[i].getId());
-
+                if(id > 0){
+                  fila = ordenarFila(fila);
+                }
+                
                 primeiroFila = fila.begin();
                 ultimoFila = fila.end();
 
@@ -61,6 +68,11 @@ class Dijstra{
             visitar(grafo, *primeiroFila);
         }
     }
+   
+   list<int> ordenarFila(fila){
+      list<int> aux;
+      return aux;
+   }
 
     void printFila(list<int> fila, int n, TVertice v[]){
         cout << "Tamanho da fila " << fila.size()<< endl;
@@ -79,7 +91,7 @@ class Dijstra{
 
 
             cout << "   Q[ ";
-            //for(int i : fila){/// percore a fila de vertices e imprime os elementos que estão nela
+            //for(int i : fila){/// percore a fila de vertices e imprime os elementos que estÃ£o nela
             for(list<int>::iterator i = fila.begin(); i!=fila.end(); i++){
                 cout << " | " << v[*i].getId() << ": " << v[*i].getCor() << " | ";
             }
