@@ -30,23 +30,24 @@ class Dijstra{
         }
 
     void visitar(TGrafo grafo, int id){
+        fila.pop_front();
 
         cout << "Visitou o "<< id << endl;
+
         for(int i = 0; i < grafo.getN(); i++){
              if((grafo.MAdj[id][i] == 1 || grafo.MAdj[i][id] == 1) && grafo.vertices[i].getCor() == "Branco"){
-                int distanciaPredecessor = grafo.vertices[id].getDistancia();  
-                int pesoAresta = grafo.MPeso[i][id];
-                
-                grafo.vertices[i].setCor("Cinza");
-                grafo.vertices[i].setDistancia(distanciaPredecessor + pesoAresta); /// pega a distancia atual mais o peso
-                grafo.vertices[i].setPredecessorId(id); 
-                
-                fila.push_back(i);
+                int pesoAresta = grafo.MAPeso[i][id];
+                int distanciaPredecessor = grafo.vertices[id].getDistancia();
+                int distanciaAtual = distanciaPredecessor + pesoAresta;  /// pega a do predecessor atual mais o peso
 
-                if(id > 0){
-                  fila = ordenarFila(fila);
-                }
-                
+
+                grafo.vertices[i].setCor("Cinza");
+                grafo.vertices[i].setDistancia(distanciaAtual);
+                grafo.vertices[i].setPredecessorId(id);
+
+               organizarFilaEAdd(grafo.vertices, i);
+
+
                 primeiroFila = fila.begin();
                 ultimoFila = fila.end();
 
@@ -59,8 +60,7 @@ class Dijstra{
 
         printFila(fila, grafo.getN(), grafo.vertices);
 
-        cout << "Retirado o " << *primeiroFila << " da lista" << endl;
-        fila.pop_front();
+
         primeiroFila = fila.begin();
         ultimoFila = fila.end();
 
@@ -68,12 +68,26 @@ class Dijstra{
             visitar(grafo, *primeiroFila);
         }
     }
-   
-   list<int> ordenarFila(fila){
-      list<int> aux;
-      return aux;
-   }
 
+    organizarFilaEAdd(TVertice v[], int novo){
+        list<int> aux;
+
+        if(fila.size() > 0){
+            for(list<int>::iterator i = fila.begin(); i!=fila.end(); i++){
+                if(v[*i].getDistancia() < v[novo].getDistancia()){
+                    aux.push_back(*i);
+                }
+                else{
+                    aux.push_back(novo);
+                    aux.push_back(*i);
+                }
+            }
+        }
+        else{
+            aux.push_back(novo);
+        }
+        fila = aux;
+    }
     void printFila(list<int> fila, int n, TVertice v[]){
         cout << "Tamanho da fila " << fila.size()<< endl;
         if(fila.size() > 0){
@@ -84,7 +98,7 @@ class Dijstra{
             cout << " ]" << endl;
 
             cout << "   P[ ";
-            for(int i = 0; i < n; i++){ /// percore todos os vertices e imprime o predessesor
+            for(int i = 0; i < n; i++){/// percore todos os vertices e imprime o predessesor
                 cout << " | " << v[i].getId() << ": " << v[i].getPredecessorId() << " | ";
             }
             cout << " ]" << endl;
@@ -93,7 +107,7 @@ class Dijstra{
             cout << "   Q[ ";
             //for(int i : fila){/// percore a fila de vertices e imprime os elementos que estão nela
             for(list<int>::iterator i = fila.begin(); i!=fila.end(); i++){
-                cout << " | " << v[*i].getId() << ": " << v[*i].getCor() << " | ";
+                cout << " [ " << v[*i].getId() << ": " << v[*i].getCor() << ": D = " << v[*i].getDistancia()<< " ] ";
             }
             cout << " ]\n\n" << endl;
         }

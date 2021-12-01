@@ -36,6 +36,7 @@
 		</Compiler>
 		<Unit filename="include/BuscaEmLargura.h" />
 		<Unit filename="include/BuscaEmProfundidade.h" />
+		<Unit filename="include/Dijstra.h" />
 		<Unit filename="include/TGrafo.h" />
 		<Unit filename="include/TVertice.h" />
 		<Unit filename="main.cpp" />

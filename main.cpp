@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include<time.h>
 #include "TGrafo.h"
 #include "BuscaEmLargura.h"
 #include "BuscaEmProfundidade.h"
@@ -86,6 +87,7 @@ void completarGrafo(TGrafo * grafo){
 }
 
 void grafoAleatorio(TGrafo * grafo){
+    srand(time(NULL));
     int qtdVertice = rand() % 9 + 1;;
     *grafo = TGrafo(0, 0, 0);
 
@@ -94,7 +96,7 @@ void grafoAleatorio(TGrafo * grafo){
         int maxAresta = rand() % qtdVertice; ///
         int peso = rand() % 21 + 2; ///
         for( int j = 0; j < maxAresta; j++){
-            string r = grafo->insereAresta(i, rand() % qtdVertice, peso);
+            string r = grafo->insereAresta(i, rand() % qtdVertice, peso + j);
         }
     }
 }
